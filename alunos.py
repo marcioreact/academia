@@ -1,11 +1,11 @@
 lista_alunos = []
 
 def cadastrar_aluno(lista):
-    nome = input('Insira o nome do aluno: ')
+    nome = input('Insira o nome do aluno(a): ')
 
     while True:
         try:
-            idade = int(input('Insira a idade do aluno: '))
+            idade = int(input('Insira a idade do aluno(a): '))
             break
         except ValueError:
             print('Idade inválida. Digite uma idade válida (número inteiro).')
@@ -22,11 +22,11 @@ def cadastrar_aluno(lista):
 
     lista.append(aluno)
 
-    print(f'\nAluno {nome} cadastrado com sucesso! Seja bem vindo!\n')
+    print(f'\nAluno(a) {nome} cadastrado com sucesso! Seja bem vindo!\n')
 
 def listar_alunos(lista):
     if not lista:
-        print('\nNenhum aluno cadastrado.\n')
+        print('\nNenhum aluno(a) cadastrado.\n')
         return
 
     print('\n>>>> Lista de alunos <<<<')
@@ -67,15 +67,15 @@ def menu():
         elif opcao == '2':
             listar_alunos(lista_alunos)
         elif opcao == '3':
-            nome = input('Digite o nome do aluno a buscar: ')
+            nome = input('Digite o nome do aluno(a) a buscar: ')
             aluno = buscar_aluno(lista_alunos, nome)
             if aluno:
-                print('\nAluno encontrado:')
+                print('\nAluno(a) encontrado:')
                 print(aluno)
             else:
                 print(f'\nAluno {nome} não encontrado.')
         elif opcao == '4':
-            nome = input('Digite o nome do aluno a remover: ')
+            nome = input('Digite o nome do aluno(a) a remover: ')
             remover_aluno(lista_alunos, nome)
         elif opcao == '5':
             print('Encerrando o programa...')
