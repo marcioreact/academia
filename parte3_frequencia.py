@@ -66,6 +66,7 @@ def registrar_entrada(lista_frequencia, nome):
     }
     lista_frequencia.append(frequencia)
     print(f'Entrada registrada para {nome} às {hora_entrada}.')
+    salvartxt(lista_frequencia)
 
 def registrar_saida(lista_frequencia, nome):
     data_atual = datetime.datetime.now().strftime('%d/%m/%Y')
@@ -75,6 +76,7 @@ def registrar_saida(lista_frequencia, nome):
         if registro['nome'].lower() == nome.lower() and registro['data'] == data_atual and registro['saida'] is None:
             registro['saida'] = hora_saida
             print(f'Saída registrada para {nome} às {hora_saida}.')
+            salvartxt(lista_frequencia)
             return
     print(f'O(a) aluno(a) {nome} ainda não entrou. Registre a entrada primeiro.')
 
@@ -93,6 +95,8 @@ def salvartxt(lista_frequencia, nome_arquivo='frequencia.txt'):
             arquivo.write(linha)
 
 def carregar_txt(lista_frequencia, nome_arquivo='frequencia.txt'):
+    lista_frequencia.clear()
+
     try:
         with open(nome_arquivo, 'r') as arquivo:
             for linha in arquivo:
