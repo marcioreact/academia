@@ -1,12 +1,3 @@
-
-Link do Discord
-
-https://discord.gg/S8VsbaCa
-
-\o
-
-
-
 # academia
 Sistema de gerenciamento de academias
 
