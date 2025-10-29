@@ -263,7 +263,7 @@ def gestao_financeira():
 
         print('Lista de pagamentos')
         for p in pagamentos:
-            print(f'Aluno: {p['nome']} | Valor: R$ {p['valor']:.2f} | Data: {p['data']}')
+            print(f"Aluno: {p['nome']} | Valor: R$ {p['valor']:.2f} | Data: {p['data']}")
         print('----------------------\n')
 
 
@@ -284,12 +284,12 @@ def gestao_financeira():
         print('\n=== Relatório Financeiro ===')
         total = 0
         for p in pagamentos:
-            print(f'Aluno: {p['nome']:<20} Valor: R$ {p['valor']:<8.2f} Data: {p['data']}')
+            print(f"Aluno: {p['nome']:<20} Valor: R$ {p['valor']:<8.2f} Data: {p['data']}")
             total += p['valor']
         print('--------------------------------')
         print(f'Total Geral: R$ {total:.2f}')
 
-    # menu
+    
     def menu_financeiro():
         while True:
             print('\n=== Menu Financeiro ===')
@@ -314,12 +314,10 @@ def gestao_financeira():
                 break
             else:
                 print('Opção inválida!')
-
-    if __name__ == '__main__':
+    
         menu_financeiro()
 
 def agendamento_treinos():
-    
     def calcular_imc(peso, altura):
         return peso / (altura ** 2)
 
@@ -347,34 +345,51 @@ def agendamento_treinos():
             'Obesidade grau 3': ['Hidroginástica', 'Caminhada', 'Treino supervisionado leve']
         }
         return sugestoes.get(classificacao, [])
-    try:
-        while True:
-            print('\n=== Agendamento e Treinos ===')
+
+    while True:
+        print('\n=== Agendamento e Treinos ===')
+        print('1 - Cadastrar aluno e calcular IMC')
+        print('0 - Voltar ao menu principal')
         
+        opcao2 = input('Escolha uma opção: ')
+        
+        if opcao2 == '0':
+            print('Voltando ao menu principal...')
+            break
+        
+        elif opcao2 == '1':
             nome = input('Digite seu nome: ')
             altura = float(input('Digite sua altura (em metros): '))
-            peso = int(input('Digite seu peso (em kg): '))
+            peso = float(input('Digite seu peso (em kg): '))
 
             imc = calcular_imc(peso, altura)
             classificacao = classificar_imc(imc)
             modalidades = sugerir_modalidades(classificacao)
 
-            print(f'\n {nome}, seu IMC é: {imc:.2f} ({classificacao})')
-            print('\n Modalidades de treino recomendadas para você:')
-            for i, treino in enumerate(modalidades, 1):
-                print(f'   {i}. {treino}')
+            print(f'\n{nome}, seu IMC é: {imc:.2f} ({classificacao})')
+            print('\nModalidades de treino recomendadas:')
 
-            ficha = {'Nome': nome, 'IMC': round(imc, 2), 'Classificação': classificacao, 'Modalidades': modalidades}
+            i = 0 
+            while i < len(modalidades):
+                print(f'   {i + 1}. {modalidades[i]}')
+                i += 1
+
+            ficha = {
+                'Nome': nome,
+                'IMC': round(imc, 2),
+                'Classificação': classificacao,
+                'Modalidades': modalidades
+            }
 
             with open('arquivo.txt', 'a') as arquivo:
                 arquivo.write(json.dumps(ficha) + '\n')
 
-            continuar = input('\n Deseja cadastrar outro usuário? (s/n): ')
-            if continuar != 's':
-                print('Encerrando o programa')
+            continuar = input('\nDeseja cadastrar outro usuário? (s/n): ')
+            if continuar.lower() != 's':
+                print('Módulo de agendamento encerrado')
                 break
-    except ValueError:
-        print('Opção inválida! Tente novamente.')
+        else:
+            print('Opção inválida! Tente novamente.')
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     menu()
